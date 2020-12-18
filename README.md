@@ -27,4 +27,5 @@ x,y的值介于0-1时，代表相对坐标，x,y大于1时，为绝对坐标
 
 若在发送中途关闭掉窗口，只要在再次打开时选取与上次路径相同名字相同的歌词/弹幕文件即可在上次发送的中断位置继续发送。.ass逐字弹幕会从中断句的第一个字开始发送，需要自行删除上次发送的当句文字弹幕。
 
+项目地址 https://github.com/Pieceleaf/DMShooter
 本项目参考了 [biliDmShooter](https://github.com/opheliaKyouko/biliDmShooter)和[bilibili-API-collect ](https://github.com/SocialSisterYi/bilibili-API-collect)   
