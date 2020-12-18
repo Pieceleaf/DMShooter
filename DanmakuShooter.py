@@ -5,7 +5,8 @@ import re
 import sys
 
 #来自一个彩笔：void星葉
-#PS:虽然这玩意写的跟屎一样，但好在能用
+#PS:虽然这玩意写的跟屎一样，但竟然能用
+
 class DmShooter:
     def postDm0(self,pocess,duration,msg):
         xx = random.random()
