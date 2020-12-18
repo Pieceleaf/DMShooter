@@ -70,8 +70,24 @@ class Sender:
         self.data['color'] = color
         self.data['mode'] = '7'
         self.data['rnd'] = str(int(round(time.time()) * 1000000 + random.randint(0, 999999)))
+        print(r"Send: "+json.dumps(self.data['msg']).encode('utf-8').decode('unicode_escape'))
         response = requests.post('https://api.bilibili.com/x/v2/dm/post', headers=self.headers, data=self.data)
-        print(r"Send: "+json.dumps(self.data).encode('utf-8').decode('unicode_escape'))
+        reqResult = response.json().get("code")
+        if reqResult == 0:
+            print("==> 成功")
+            time.sleep(5)
+        else:
+            print("==> 失败")
+            print("90秒后重试...")
+            for i in range(29):
+                print('\r{0}{1}'.format('▉' * i, '▁' * (30 - i)), end='')
+                time.sleep(3)
+                pass
+            print('\r{0}{1}'.format('▉' * 29, '▁'), end='')
+            time.sleep(3)
+            print('\r{0}'.format('▉' * 30))
+            pass
+        time.sleep(0.1 + random.random())
         return response
 
     pass
