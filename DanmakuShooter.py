@@ -5,8 +5,7 @@ import re
 import sys
 
 #来自一个彩笔：void星葉
-#PS:虽然这玩意写的跟屎一样，但竟然能用
-
+#PS:虽然这玩意写的跟屎一样，但好在能用
 class DmShooter:
     def postDm0(self,pocess,duration,msg):
         xx = random.random()
@@ -48,27 +47,10 @@ class DmShooter:
                                     xx + x)*750) + ',' + '%.2f' % (((yy*0.7+0.1)-fontSize*0.35*(random.random()+1)/700)*900)  + ',100,0,0,"仿宋",0]',
                     videotim='%d' % (pocess + tictoc * count * 1000), fontsize='%d' % fontSize,
                     color='16777215').content.decode('utf-8'))
-                print(r"Return: "+sendResult)
                 reqResult=json.loads(sendResult).get("code")
-                print(r"code: "+'%d' % reqResult)
-                if(reqResult != 0):
-                    time.sleep(60.1 + random.random())
-                    pass
-                else:
-                    time.sleep(5.1 + random.random())
-                    pass
-            '''
-            time.sleep(5.1 + random.random())
-            sendResult = (a.sendMod7(
-                msg='[' + '%.2f' % (xx + x) + ',' + '%.2f' % (yy) + ',"1-0",0.5,"' + char + '",0,0,' + '%.2f' % (
-                                xx + x) + ',' + '%.2f' % yy + ',150,350,0,"黑体",1]',
-                videotim='%d' % ((pocess) + (duration) * 1000), fontsize='%d' % fontSize,
-                color='16777215').content.decode('utf-8'))
-            print(sendResult)
-            '''
             x+=fontSize/700
             count+=1
-        return reqResult
+        return "\n本行结束...\n"
         pass
 
     def create_mode7(self, pocess_='0', x0_='0', y0_='0', alpha0_='1', alpha1_='1', duration_='4.5', msg_='', rotateZ_='0', rotateY_='0', x1_='0', y1_='0', mov_duration_='500', mov_delay_='0', stroke_='0', font_='黑体', font_size_='25', acc_='1', color_='FFFFFF'):
@@ -82,16 +64,8 @@ class DmShooter:
                     ',' + mov_duration_ + ',' + mov_delay_ + ',' + stroke_ + ',"' + font_ + '",' + acc_ + ']',
                 videotim=pocess_, fontsize=font_size_,
                 color=int(color_,16)).content.decode('utf-8'))
-            print(r"Return: "+sendResult)
             reqResult=json.loads(sendResult).get("code")
-            print(r"code: "+'%d' % reqResult)
-            if(reqResult != 0):
-                time.sleep(60.1 + random.random())
-                pass
-            else:
-                time.sleep(5.1 + random.random())
-                pass
-        return reqResult
+        return "\n"
         pass
 
 class Tools():
@@ -240,7 +214,8 @@ for lintItem in lyric_lines[loadLine:]:
             endTimeMark = float(end_time[0]) * 3600 + float(end_time[1]) * 60 + float(end_time[2])
             duration = (endTimeMark - beginTimeMark)
             # print(currentLine[1],'%6f'% timeMark, currentLine[9])
-            msg = currentLine[10].replace("120)}", "")
+            cut = currentLine[10].find(")}")+2
+            msg = currentLine[10][cut:]
             if len(currentLine)>11:
                 i=0
                 while len(currentLine)-i>11:
