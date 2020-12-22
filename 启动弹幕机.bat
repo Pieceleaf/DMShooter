@@ -1,2 +1,2 @@
 @echo off
-start python .\DanmakuShooter.py
+start python3 .\DanmakuShooter.py
