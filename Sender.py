@@ -1,4 +1,5 @@
 # coding=utf-8
+from __future__ import print_function
 import json
 import re
 import requests, time, random
@@ -77,7 +78,7 @@ class Sender:
             print("==> 成功")
             time.sleep(5)
         else:
-            print("==> 失败")
+            print("==> 失败  code:"+'%d' % reqResult +" "+ response.json().get("message"))
             print("90秒后重试...")
             for i in range(29):
                 print('\r{0}{1}'.format('▉' * i, '▁' * (30 - i)), end='')
