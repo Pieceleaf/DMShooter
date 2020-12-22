@@ -1,4 +1,4 @@
-#  DMShooter](https://github.com/Pieceleaf/DMShooter)    
+#  [DMShooter](https://github.com/Pieceleaf/DMShooter)    
 ## bilibili Mode7高级弹幕机    
 * 本弹幕机可以将.ass字幕转换为逐字弹幕并进行自动发射，也可发射完全自定义的mode7弹幕，自定义mode7弹幕文件后缀规定为.m7，文件编码为UTF-8。   
 * .m7 弹幕文件每行记录一条m7弹幕，需要对所有值进行设定，每行m7弹幕的格式及说明如下：   
