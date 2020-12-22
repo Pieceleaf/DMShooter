@@ -1,15 +1,15 @@
-# DMShooter   
+#  DMShooter](https://github.com/Pieceleaf/DMShooter)    
 ## bilibili Mode7高级弹幕机    
 * 本弹幕机可以将.ass字幕转换为逐字弹幕并进行自动发射，也可发射完全自定义的mode7弹幕，自定义mode7弹幕文件后缀规定为.m7，文件编码为UTF-8。   
 * .m7 弹幕文件每行记录一条m7弹幕，需要对所有值进行设定，每行m7弹幕的格式及说明如下：   
 >**出现时间,结束时间,起始x,起始y,结束x,结束y,起始透明度,结束透明度,z轴角度,y轴角度,运动耗时(ms),运动延迟时间(ms),0/1(线性加速),字体,字体大小,颜色,0/1(文字描边),弹幕内容**   
 ↓   
 说明：   
-< span style =" font-family：Source Code Pro; background-color：＃000000; color：#ff0000;">出现时间< / span>和<font color=#00ffff>结束时间</font>相差最多10秒，格式可以为 时:分:秒 / 分:秒 / 秒 ，支持小数，最末位单位均为“秒”    
-<font color=#00ffff>x</font>,<font color=#00ffff>y</font>的值介于0-1时，代表相对坐标，x,y大于1时，为绝对坐标   
-<font color=#00ffff>透明度</font>为0-1之间的任意值       
-<font color=#00ffff>角度</font>单位为度，不使用弧度制   
-<font color=#00ffff>线性加速</font>为 0 时，实际效果不是匀速，而是线性减速   
+出现时间和结束时间相差最多10秒，格式可以为 时:分:秒 / 分:秒 / 秒 ，支持小数，最末位单位均为“秒”    
+x,y的值介于0-1时，代表相对坐标，x,y大于1时，为绝对坐标   
+透明度为0-1之间的任意值       
+角度单位为度，不使用弧度制   
+线性加速为 0 时，实际效果不是匀速，而是线性减速   
 运动相关的两个毫秒时间值不支持小数设定   
 项目中没考虑数值格式验证和对空值的修正，请在制作.m7文件时保证格式正确   
     
@@ -27,5 +27,4 @@
 
 若在发送中途关闭掉窗口，只要在再次打开时选取与上次路径相同名字相同的歌词/弹幕文件即可在上次发送的中断位置继续发送。.ass逐字弹幕会从中断句的第一个字开始发送，需要自行删除上次发送的当句文字弹幕。
 
-项目地址 https://github.com/Pieceleaf/DMShooter   
 本项目参考了 [biliDmShooter](https://github.com/opheliaKyouko/biliDmShooter)和[bilibili-API-collect ](https://github.com/SocialSisterYi/bilibili-API-collect)   
