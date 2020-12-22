@@ -89,15 +89,15 @@ class Tools():
         f.close
         return cookie
 
-    def load_progress(self,file_name):
+    def load_progress(self):
         try:
             f = open('record.txt', 'r')
             line_num = f.readline()
             ass_name = f.readline()
+            global fileNmae
+            fileNmae = ass_name
             f.close
-            if ass_name != file_name:
-                print('将覆盖上传记录：'+ass_name+'  第'+line_num+'行')
-                line_num = '0'
+            print('当前上传记录：'+ass_name+'  第'+line_num+'行')
             return line_num
         except IOError:
             return '0'
@@ -167,9 +167,30 @@ sender = Sender(bvid, cid, cookie)
 xx = random.random()
 yy = random.random()
 text = "Danmaku Content"
+
 fileNmae = ''
+loadLine = int(tool.load_progress())
+if loadLine>0:
+    endFlag=0
+    choose = input("发现写入记录:第" + '%d' % loadLine + "行，是否从上次中断的部分继续发送？Y/N\n")
+    while endFlag==0:
+        if choose == 'y' or choose == 'Y':
+            print('从上次断点继续发送')
+            endFlag = 1
+            continue
+        elif choose == 'n' or choose == 'N':
+            print('重新选择文件')
+            endFlag = 1
+            fileNmae = ''
+            loadLine=0
+            continue
+        else:
+            choose = input("请输入Y或N")
+            continue
+    pass
+
 while not (fileNmae.endswith('.ass') or fileNmae.endswith('.m7')):
-    fileNmae = input("请输入歌词文件路径，可直接将歌词文件拖进本窗口：\n")  # 输入歌词文件名
+    fileNmae = input("请输入文件路径，可直接将文件拖进本窗口：\n")  # 输入歌词文件名
     if fileNmae.endswith('.ass') or fileNmae.endswith('.m7'):
         pass
     else:
@@ -180,24 +201,7 @@ try:
 except IOError:
     print("exit because the file don't exist")
     exit()
-loadLine = int(tool.load_progress(fileNmae))
-if loadLine>0:
-    endFlag=0
-    choose = input("发现写入记录:第" + '%d' % loadLine + "行，是否从上次中断的部分继续发送弹幕？Y/N\n")
-    while endFlag==0:
-        if choose == 'y' or choose == 'Y':
-            print('从上次断点继续发送弹幕')
-            endFlag = 1
-            continue
-        elif choose == 'n' or choose == 'N':
-            print('从头开始发送弹幕')
-            endFlag = 1
-            loadLine=0
-            continue
-        else:
-            choose = input("请输入Y或N")
-            continue
-    pass
+
 countLine = 0
 lyric_lines = file_object.readlines()
 file_object.close()
