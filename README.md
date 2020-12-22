@@ -5,7 +5,7 @@
 >**出现时间,结束时间,起始x,起始y,结束x,结束y,起始透明度,结束透明度,z轴角度,y轴角度,运动耗时(ms),运动延迟时间(ms),0/1(线性加速),字体,字体大小,颜色,0/1(文字描边),弹幕内容**   
 ↓   
 说明：   
-<font color=#00ffff>出现时间</font>和<font color=#00ffff>结束时间</font>相差最多10秒，格式可以为 时:分:秒 / 分:秒 / 秒 ，支持小数，最末位单位均为“秒”    
+< span style =" font-family：Source Code Pro; background-color：＃000000; color：#ff0000;">出现时间< / span>和<font color=#00ffff>结束时间</font>相差最多10秒，格式可以为 时:分:秒 / 分:秒 / 秒 ，支持小数，最末位单位均为“秒”    
 <font color=#00ffff>x</font>,<font color=#00ffff>y</font>的值介于0-1时，代表相对坐标，x,y大于1时，为绝对坐标   
 <font color=#00ffff>透明度</font>为0-1之间的任意值       
 <font color=#00ffff>角度</font>单位为度，不使用弧度制   
