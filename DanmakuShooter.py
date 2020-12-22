@@ -1,3 +1,5 @@
+# coding=utf-8
+from __future__ import print_function
 import json
 import time, random
 from Sender import Sender
@@ -6,6 +8,7 @@ import sys
 
 #来自一个彩笔：void星葉
 #PS:虽然这玩意写的跟屎一样，但好在能用
+
 class DmShooter:
     def postDm0(self,pocess,duration,msg):
         xx = random.random()
@@ -91,13 +94,15 @@ class Tools():
 
     def load_progress(self):
         try:
+            global fileNmae
+            global html
             f = open('record.txt', 'r')
             line_num = f.readline()
-            ass_name = f.readline()
-            global fileNmae
+            ass_name = f.readline().replace('\n','')
+            html = f.readline().replace('\n','')
             fileNmae = ass_name
             f.close
-            print('当前上传记录：'+ass_name+'  第'+line_num+'行')
+            print('当前上传记录：'+ass_name+'  Line:'+line_num)
             return line_num
         except IOError:
             return '0'
@@ -131,19 +136,19 @@ class Tools():
 
 bvid = '' #'BV1hp411f7me'
 cid = ''  #'261793445'
-ds=DmShooter();
 tool=Tools()
 gotVideoId = False
 useCookie = ''
 endFlag=0
 cookie=""
+html=''
 
 cookie = tool.load_cookie()
 if cookie != '0':
     useCookie = input("是否使用记录的cookie？Y/N\n")
     while endFlag==0:
         if useCookie == 'y' or useCookie == 'Y':
-            print('使用记录的cookie:'+cookie)
+            print('已载入保存的cookie')
             endFlag = 1
             continue
         elif useCookie == 'n' or useCookie == 'N':
@@ -158,23 +163,15 @@ else:
     cookie = tool.get_cookie()
     pass
 
-while bvid=='':
-    html=''
-    html=input('\n请粘贴目标视频网页端播放页面分享的嵌入代码：\n')
-    gotVideoId=tool.getVideoId(html)
-
-sender = Sender(bvid, cid, cookie)
-xx = random.random()
-yy = random.random()
-text = "Danmaku Content"
-
 fileNmae = ''
 loadLine = int(tool.load_progress())
 if loadLine>0:
-    endFlag=0
-    choose = input("发现写入记录:第" + '%d' % loadLine + "行，是否从上次中断的部分继续发送？Y/N\n")
-    while endFlag==0:
+    choose=''
+    print("发现写入记录，是否继续发送？选否将重新选择文件\n")
+    while choose != 'y' and choose != 'Y' and choose != 'n' and choose != 'N':
+        choose = input("Y/N?\n")
         if choose == 'y' or choose == 'Y':
+            tool.getVideoId(html)
             print('从上次断点继续发送')
             endFlag = 1
             continue
@@ -189,6 +186,10 @@ if loadLine>0:
             continue
     pass
 
+while bvid=='':
+    html=input('\n请粘贴目标视频网页端播放页面分享的嵌入代码：\n')
+    gotVideoId=tool.getVideoId(html)
+
 while not (fileNmae.endswith('.ass') or fileNmae.endswith('.m7')):
     fileNmae = input("请输入文件路径，可直接将文件拖进本窗口：\n")  # 输入歌词文件名
     if fileNmae.endswith('.ass') or fileNmae.endswith('.m7'):
@@ -201,6 +202,12 @@ try:
 except IOError:
     print("exit because the file don't exist")
     exit()
+
+sender = Sender(bvid, cid, cookie)
+ds=DmShooter();
+xx = random.random()
+yy = random.random()
+text = "Danmaku Content"
 
 countLine = 0
 lyric_lines = file_object.readlines()
@@ -298,6 +305,6 @@ for lintItem in lyric_lines[loadLine:]:
     print(postText)
     countLine+=1
     thisLine ='%d' % (countLine + loadLine)
-    tool.save_progress(thisLine+"\n"+fileNmae)
+    tool.save_progress(thisLine+"\n"+fileNmae+"\n"+html)
     pass
 pass
